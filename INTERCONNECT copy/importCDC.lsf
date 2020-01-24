@@ -1,8 +1,0 @@
-# importCDC.lsf: imprts the CDC S-parameter model with
-# the properties specified in the name vartiable
-
-addelement("Optical N Port S-Parameter");
-set("name", cdc);
-set("passivity","optimal");
-setnamed(cdc, "load from file", true);
-setnamed(cdc, "s parameters filename","../MATLAB/CDC Compact Models/"+cdc+".dat");
