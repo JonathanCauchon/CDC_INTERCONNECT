@@ -1,0 +1,39 @@
+# make2stageFilter.lsf: creates a two-stage cdc filter with the 
+# parameters of the two CDC specified by cdc1 and cdc2.
+# Also creates an ONA and makes the connections
+# Warning: cdc1 and cdc2 can't be the same.
+
+deleteall;
+# Creating the 2 CDCs and ONA:
+cdc = cdc1; importCDC;
+setposition(cdc1,0,150);
+
+cdc = cdc2; importCDC;
+setposition(cdc2,0,350);
+
+newONA;
+setposition(ONA,-225,88);
+rotateelement(ONA);rotateelement(ONA);
+rotateelement(ONA);
+
+addelement("ebeam_wg_strip_1550");
+wg1 = "wgs_1";
+rotateelement(wg1);
+setposition(wg1,-61,250);
+set("wg_length",connection1*1e-6);
+
+addelement("ebeam_wg_strip_1550");
+wg2 = "wgs_2";
+rotateelement(wg2);
+setposition(wg2,60,250);
+set("wg_length",connection2*1e-6);
+
+# Making the connections:
+connect(ONA,"output",cdc1,"opt1");
+connect(ONA,"input 2",cdc1,"opt3");
+connect(ONA,"input 1",cdc2,"opt2");
+connect(cdc1,"opt2",wg1,"opt_1");
+connect(wg1,"opt_2",cdc2,"opt1");
+connect(cdc1,"opt4",wg2,"opt_1");
+connect(wg2,"opt_2",cdc2,"opt3");
+connect(cdc2,"opt4",ONA,"input 3");

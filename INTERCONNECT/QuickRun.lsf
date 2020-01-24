@@ -1,0 +1,34 @@
+# quickRun.lsf: runs simulation, then plots spectrum
+
+run;
+dropT = getresult(ONA,"input 1/mode 1/transmission");
+thruT = getresult(ONA,"input 2/mode 1/transmission");
+dropPhase = getresult(ONA,"input 1/mode 1/angle");
+thruPhase = getresult(ONA,"input 2/mode 1/angle");
+wvl = dropT.wavelength;
+
+
+if (plotType==1) # if linear
+{
+    dropT = dropT.%mode 1 transmission%;
+thruT = thruT.%mode 1 transmission%;
+    plot(wvl,abs(dropT)^2,abs(thruT)^2,"wavelength (nm)","Transmissivity");
+    legend("Drop","Thru");        
+}
+
+if (plotType==2) # if log
+{
+    dropT = dropT.%mode 1 transmission%;
+thruT = thruT.%mode 1 transmission%;
+    plot(wvl,10*log10(abs(dropT)^2),10*log10(abs(thruT)^2),"wavelength (nm)","Response (dB)");
+    legend("Drop","Thru"); 
+    setplot("y min",-50); setplot("y max",1);       
+}
+
+if (plotType==3) # phase plot
+{
+    visualize(dropPhase, thruPhase);
+         
+}
+
+switchtolayout;

@@ -1,0 +1,13 @@
+# newONA.lsf: script that creates a new ONA
+# with the preferred parameters and named by variable ONAname.
+# Deletes older ONA with the same name
+
+#select(ONA); delete;
+addelement("Optical Network Analyzer");
+set("name",ONA);
+set("input parameter","start and stop");
+set("start frequency", c/1565e-9);
+set("stop frequency", c/1530e-9);
+set("number of points", 5000);
+set("plot kind", "wavelength");
+set("number of input ports", 3);
