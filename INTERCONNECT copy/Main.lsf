@@ -1,0 +1,80 @@
+# Main.lsf
+
+# List of scripts that can be used
+# For drawing:
+# 	importCDC: imports CDC with params specified by cdc variable.
+# 	newONA: Creates new ONA with preferred parameters.
+# 	make2stageFilter: creates a 2-stage filter composed of cdc1 and cdc2.
+# 
+# For simulation and analysis:
+# 	quickRun: Runs simulation, then displays drop & thru responses.
+#                 Plot type depends on the variable plotType, either linear
+#		 or log or phase. 
+#	Demonstration: takes CDCs 1-4 and creates a 2-channel wdm filter.
+
+
+# Setting up variable
+
+directory = "/Users/Jonathan/Documents/Maitrise/SiEPIC Passives/Modelling/INTERCONNECT";
+if(pwd != directory){
+    cd(directory);
+}
+
+ONA = "ONA";
+plotType = 2; # 1:linear, 2:log, 3:phase
+
+# WG connection length between CDCs
+totalLength = 2000;
+connection1 = totalLength/2; # in microns
+connection2 = connection1; #connection1;
+
+cdc1 = "p326_a12_T300_N1000_K20";
+cdc2 = "p326_a12_T310_N1000_K20";
+make2stageFilter;
+QuickRun;
+#matlabsave("Sim Results/FDTD_verified");
+
+
+
+
+#cdc1 = "p324_a12_T300_N1000_K100";
+#cdc2 = "p329_a12_T300_N1000_K100";
+#cdc3 = "p322_a12_T300_N1000_K100";
+#cdc4 = "p327_a12_T300_N1000_K100";
+#Demonstration;
+##matlabsave("Sim Results/Demo_300K");
+
+#cdc1 = "p324_a12_T300_N1000_K100";
+#cdc2 = "p329_a12_T310_N1000_K100";
+#cdc3 = "p322_a12_T310_N1000_K100";
+#cdc4 = "p327_a12_T300_N1000_K100";
+#Demonstration;
+##matlabsave("Sim Results/Demo_310K");
+
+#cdc1 = "p324_a12_T300_N1000_K100";
+#cdc2 = "p329_a12_T320_N1000_K100";
+#cdc3 = "p322_a12_T320_N1000_K100";
+#cdc4 = "p327_a12_T300_N1000_K100";
+#Demonstration;
+##matlabsave("Sim Results/Demo_320K");
+
+#cdc1 = "p324_a12_T300_N1000_K100";
+#cdc2 = "p329_a12_T330_N1000_K100";
+#cdc3 = "p322_a12_T330_N1000_K100";
+#cdc4 = "p327_a12_T300_N1000_K100";
+#Demonstration;
+##matlabsave("Sim Results/Demo_330K");
+
+#cdc1 = "p324_a12_T300_N1000_K100";
+#cdc2 = "p329_a12_T340_N1000_K100";
+#cdc3 = "p322_a12_T340_N1000_K100";
+#cdc4 = "p327_a12_T300_N1000_K100";
+#Demonstration;
+##matlabsave("Sim Results/Demo_340K");
+
+#cdc1 = "p324_a12_T300_N1000_K100";
+#cdc2 = "p329_a12_T350_N1000_K100";
+#cdc3 = "p322_a12_T350_N1000_K100";
+#cdc4 = "p327_a12_T300_N1000_K100";
+#Demonstration;
+##matlabsave("Sim Results/Demo_350K");
